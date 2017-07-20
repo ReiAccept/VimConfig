@@ -46,7 +46,6 @@ set autoindent
 set shiftwidth=4
 syntax on
 filetype plugin indent on
-imap jj <esc>
 map <F9> : ! g++ % -o %< -g -Wall -Wextra -Wconversion <CR>
 map <F5> : ! gdb %< <CR>
 map <F2> : ! %< <CR>
