@@ -32,6 +32,8 @@ function MyDiff()
   endif
 endfunction
 
+set noundofile
+set nobackup
 set nocompatible
 set hlsearch
 set mouse=a
@@ -44,8 +46,9 @@ set cin
 set guifont=Consolas:h12
 set autoindent
 set shiftwidth=4
+colorscheme jellybeans
 syntax on
 filetype plugin indent on
 map <F9> : ! g++ % -o %< -g -Wall -Wextra -Wconversion <CR>
-map <F5> : ! gdb %< <CR>
-map <F2> : ! %< <CR>
+map <F11> : ! gdb %< <CR>
+map <F10> : ! %< <CR>
