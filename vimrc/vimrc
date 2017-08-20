@@ -1,0 +1,25 @@
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<CR>}<ESC>O
+set noundofile
+set nobackup
+set nocompatible
+set hlsearch
+set mouse=a
+set smartindent
+set fdm=marker
+set nu
+set tabstop=4
+set softtabstop=4
+set cin
+set guifont=Consolas:h12
+set autoindent
+set shiftwidth=4
+colorscheme jellybeans
+syntax on
+filetype plugin indent on
+map <F9> : ! g++ % -o %< -g -Wall -Wextra -Wconversion <CR>
+map <F11> : ! gdb %< <CR>
+map <F10> : ! %< <CR>
