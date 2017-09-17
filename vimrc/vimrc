@@ -20,6 +20,6 @@ set shiftwidth=4
 colorscheme jellybeans
 syntax on
 filetype plugin indent on
-map <F9> : ! g++ % -o %< -g -Wall -Wextra -Wconversion <CR>
-map <F11> : ! gdb %< <CR>
-map <F10> : ! %< <CR>
+map <F5> : ! g++ % -o %< -g -Wall -Wextra -Wconversion <CR>
+map <F6> : ! %< <CR>
+map <F7> : ! gdb %< <CR>
