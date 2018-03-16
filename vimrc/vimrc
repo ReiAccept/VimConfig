@@ -1,8 +1,3 @@
-inoremap ' ''<ESC>i
-inoremap " ""<ESC>i
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {<CR>}<ESC>O
 set noundofile
 set nobackup
 set nocompatible
@@ -14,12 +9,44 @@ set nu
 set tabstop=4
 set softtabstop=4
 set cin
-set guifont=Consolas:h12
 set autoindent
 set shiftwidth=4
 colorscheme jellybeans
 syntax on
 filetype plugin indent on
-map <F5> : ! g++ % -o %< -g -Wall -Wextra -Wconversion <CR>
-map <F6> : ! %< <CR>
-map <F7> : ! gdb %< <CR>
+autocmd BufNewFile,BufRead *.cpp exec ":call SetCppFile()"
+
+if has('win32')
+	set guifont=Consolas:h12
+elseif has('unix')
+	set guifont=Ubuntu\ Monospace:h12
+elseif has('mac')
+	set guifont=Monaco:h12
+endif
+
+func SetCppFile()
+	inoremap ' ''<ESC>i
+	inoremap " ""<ESC>i
+	inoremap ( ()<ESC>i
+	inoremap [ []<ESC>i
+	inoremap { {<CR>}<ESC>O
+	map <F5> : ! g++ % -o %< -g -Wall -Wextra -Wconversion <CR>
+	map <F6> : ! %< <CR>
+	map <F7> : ! gdb %< <CR>
+endfunc
+
+func Compile()
+	if &filetype == 'cpp'
+		exec "!g++ % -o %< -g -Wall -Wextra -Wconversion"
+	elseif &filetype == 'c'
+		exec "!gcc % -o %< -g -Wall -Wextra -Wconversion"
+	elseif &filetype == 'pas'
+		exec "!fpc % -g"
+	elseif &filetype == 'tex'
+		exec "!xelatex '%'"
+	elseif &filetype == 'java'
+		exec "!javac %"
+	elseif &filetype == 'scss'
+		exec "!sass % > %<.css"
+	endif
+endfunc
