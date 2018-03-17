@@ -24,18 +24,19 @@ elseif has('mac')
 	set guifont=Monaco:h12
 endif
 
-func SetCppFile()
+function SetCppFile()
 	inoremap ' ''<ESC>i
 	inoremap " ""<ESC>i
 	inoremap ( ()<ESC>i
 	inoremap [ []<ESC>i
 	inoremap { {<CR>}<ESC>O
-	map <F5> : ! g++ % -o %< -g -Wall -Wextra -Wconversion <CR>
-	map <F6> : ! %< <CR>
+	map <F5> : call Compile() <CR>
+	map <F6> : call Run() <CR>
 	map <F7> : ! gdb %< <CR>
-endfunc
+	map <F9> : call Build_And_Run() <CR>
+endfunction
 
-func Compile()
+function Compile()
 	if &filetype == 'cpp'
 		exec "!g++ % -o %< -g -Wall -Wextra -Wconversion"
 	elseif &filetype == 'c'
@@ -49,4 +50,31 @@ func Compile()
 	elseif &filetype == 'scss'
 		exec "!sass % > %<.css"
 	endif
-endfunc
+endfunction
+
+function Run()
+	if &filetype == 'cpp'
+		if has('win32')
+			exec "! %<"
+		elseif has('unix')
+			exec "!time ./%<"
+		endif
+	elseif &filetype == 'tex'
+		exec "!okular './%<.pdf'"
+	elseif &filetype == 'java'
+		exec "!java %<"
+	elseif &filetype == 'ruby'
+		exec "!ruby %"
+	elseif &filetype == 'html'
+		exec "!firefox %"
+	elseif &filetype == 'php'
+		exec "!php %"
+	elseif &filetype == 'sh'
+		exec "!bash %"
+	endif
+endfunction
+
+function Build_And_Run()
+	call Compile()
+	call Run()
+endfunction
