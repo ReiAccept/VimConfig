@@ -11,7 +11,8 @@ set softtabstop=4
 set cin
 set autoindent
 set shiftwidth=4
-colorscheme jellybeans
+set lines=37 columns=90
+colorscheme desert
 syntax on
 filetype plugin indent on
 autocmd BufNewFile,BufRead *.cpp exec ":call SetCppFile()"
