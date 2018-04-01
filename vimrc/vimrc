@@ -16,8 +16,15 @@ colorscheme desert
 syntax on
 filetype plugin indent on
 autocmd BufNewFile,BufRead *.cpp exec ":call SetCppFile()"
+autocmd BufNewFile,BufRead *.c exec ":call SetCppFile()"
 
 if has('win32')
+	set enc=utf-8
+	set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+	set langmenu=zh_CN.UTF-8
+	source $VIMRUNTIME/delmenu.vim
+	source $VIMRUNTIME/menu.vim
+	language messages zh_CN.utf-8
 	set guifont=Consolas:h12
 elseif has('unix')
 	set guifont=Ubuntu\ Monospace:h12
@@ -54,7 +61,7 @@ function Compile()
 endfunction
 
 function Run()
-	if &filetype == 'cpp'
+	if &filetype == 'cpp' || &filetype == 'c'
 		if has('win32')
 			exec "! %<"
 		elseif has('unix')
