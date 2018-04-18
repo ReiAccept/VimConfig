@@ -1,17 +1,16 @@
+set clipboard=unnamed
 set noundofile
 set nobackup
 set nocompatible
-set hlsearch
 set mouse=a
 set smartindent
-set fdm=marker
 set nu
 set tabstop=4
 set softtabstop=4
 set cin
 set autoindent
 set shiftwidth=4
-set lines=37 columns=90
+set lines=38 columns=90
 colorscheme desert
 syntax on
 filetype plugin indent on
@@ -27,7 +26,8 @@ if has('win32')
 	language messages zh_CN.utf-8
 	set guifont=Consolas:h12
 elseif has('unix')
-	set guifont=Ubuntu\ Monospace:h12
+	source $VIMRUNTIME/delmenu.vim	
+	set guifont=Consolas\ 12
 elseif has('mac')
 	set guifont=Monaco:h12
 endif
@@ -46,7 +46,7 @@ endfunction
 
 function Compile()
 	if &filetype == 'cpp'
-		exec "!g++ % -o %< -g -Wall -Wextra -Wconversion"
+		exec "!g++ % -o %<.out -g -Wall -Wextra -Wconversion"
 	elseif &filetype == 'c'
 		exec "!gcc % -o %< -g -Wall -Wextra -Wconversion"
 	elseif &filetype == 'pas'
@@ -65,7 +65,7 @@ function Run()
 		if has('win32')
 			exec "! %<"
 		elseif has('unix')
-			exec "!time ./%<"
+			exec "!time ./%<.out"
 		endif
 	elseif &filetype == 'tex'
 		exec "!okular './%<.pdf'"
