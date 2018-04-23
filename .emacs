@@ -11,8 +11,19 @@
 (setq c-basic-offset 4)
 (electric-pair-mode t)
 (setq make-backup-files nil)
-(global-linum-mode 1) ; always show line numbers                              
+(global-linum-mode 1) ; always show line numbers
 (setq linum-format "%d| ")  ;set format
+
+(defun my-compile()  
+    (interactive)  
+    (save-some-buffers t)  
+    (let((file(file-name-nondirectory buffer-file-name)))  
+        (compile (format "g++ %s -g -o %s" file (file-name-sans-extension file))))  
+    (switch-to-buffer-other-window"*compilation*")  
+)
+(global-set-key[f5]'my-compile)
+(global-set-key[f6]'gdb)
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
