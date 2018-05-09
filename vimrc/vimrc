@@ -1,8 +1,6 @@
-set clipboard=unnamed
 set noundofile
 set nobackup
 set nocompatible
-set mouse=a
 set smartindent
 set nu
 set tabstop=4
@@ -10,7 +8,6 @@ set softtabstop=4
 set cin
 set autoindent
 set shiftwidth=4
-set lines=38 columns=90
 colorscheme desert
 syntax on
 filetype plugin indent on
@@ -18,6 +15,7 @@ autocmd BufNewFile,BufRead *.cpp exec ":call SetCppFile()"
 autocmd BufNewFile,BufRead *.c exec ":call SetCppFile()"
 
 if has('win32')
+	set lines=38 columns=90
 	set enc=utf-8
 	set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 	set langmenu=zh_CN.UTF-8
@@ -26,7 +24,6 @@ if has('win32')
 	language messages zh_CN.utf-8
 	set guifont=Consolas:h12
 elseif has('unix')
-	source $VIMRUNTIME/delmenu.vim	
 	set guifont=Consolas\ 12
 elseif has('mac')
 	set guifont=Monaco:h12
