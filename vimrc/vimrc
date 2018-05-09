@@ -8,6 +8,9 @@ set softtabstop=4
 set cin
 set autoindent
 set shiftwidth=4
+if has('gui_running')
+	set lines=38 columns=90
+endif
 colorscheme desert
 syntax on
 filetype plugin indent on
@@ -15,7 +18,6 @@ autocmd BufNewFile,BufRead *.cpp exec ":call SetCppFile()"
 autocmd BufNewFile,BufRead *.c exec ":call SetCppFile()"
 
 if has('win32')
-	set lines=38 columns=90
 	set enc=utf-8
 	set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 	set langmenu=zh_CN.UTF-8
