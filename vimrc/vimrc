@@ -47,23 +47,17 @@ function Compile()
 	if &filetype == 'cpp'
 		exec "!g++ % -o %<.out -g -Wall -Wextra -Wconversion"
 	elseif &filetype == 'c'
-		exec "!gcc % -o %< -g -Wall -Wextra -Wconversion"
-	elseif &filetype == 'tex'
-		exec "!xelatex '%'"
-	elseif &filetype == 'java'
-		exec "!javac %"
+		exec "!gcc % -o %<.out -g -Wall -Wextra -Wconversion"
 	endif
 endfunction
 
 function Run()
 	if &filetype == 'cpp' || &filetype == 'c'
 		if has('win32')
-			exec "! %<"
+			exec "! %<.out"
 		elseif has('unix')
 			exec "!time ./%<.out"
 		endif
-	elseif &filetype == 'java'
-		exec "!java %<"
 	elseif &filetype == 'sh'
 		exec "!bash %"
 	endif
