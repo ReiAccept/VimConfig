@@ -10,6 +10,7 @@ set autoindent
 set shiftwidth=4
 if has('gui_running')
 	set lines=38 columns=90
+	set guioptions-=T
 endif
 colorscheme desert
 syntax on
