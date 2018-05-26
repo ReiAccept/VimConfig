@@ -26,9 +26,9 @@ if has('win32')
 	language messages zh_CN.utf-8
 	set guifont=Consolas:h12
 elseif has('unix')
-	set guifont=Consolas\ 12
+	set guifont=Monospace\ 12
 elseif has('mac')
-	set guifont=Monaco:h12
+	set guifont=Monaco\ 12
 endif
 
 function SetCppFile()
@@ -48,14 +48,10 @@ function Compile()
 		exec "!g++ % -o %<.out -g -Wall -Wextra -Wconversion"
 	elseif &filetype == 'c'
 		exec "!gcc % -o %< -g -Wall -Wextra -Wconversion"
-	elseif &filetype == 'pas'
-		exec "!fpc % -g"
 	elseif &filetype == 'tex'
 		exec "!xelatex '%'"
 	elseif &filetype == 'java'
 		exec "!javac %"
-	elseif &filetype == 'scss'
-		exec "!sass % > %<.css"
 	endif
 endfunction
 
@@ -66,16 +62,8 @@ function Run()
 		elseif has('unix')
 			exec "!time ./%<.out"
 		endif
-	elseif &filetype == 'tex'
-		exec "!okular './%<.pdf'"
 	elseif &filetype == 'java'
 		exec "!java %<"
-	elseif &filetype == 'ruby'
-		exec "!ruby %"
-	elseif &filetype == 'html'
-		exec "!firefox %"
-	elseif &filetype == 'php'
-		exec "!php %"
 	elseif &filetype == 'sh'
 		exec "!bash %"
 	endif
