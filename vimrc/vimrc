@@ -4,13 +4,13 @@ set nocompatible
 set smartindent
 set nu
 set tabstop=4
-set softtabstop=4
+set expandtab
 set cin
 set autoindent
 set shiftwidth=4
 if has('gui_running')
-	set lines=38 columns=90
-	set guioptions-=T
+    set lines=38 columns=90
+    set guioptions-=T
 endif
 colorscheme desert
 syntax on
@@ -19,52 +19,52 @@ autocmd BufNewFile,BufRead *.cpp exec ":call SetCppFile()"
 autocmd BufNewFile,BufRead *.c exec ":call SetCppFile()"
 
 if has('win32')
-	set enc=utf-8
-	set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-	set langmenu=zh_CN.UTF-8
-	source $VIMRUNTIME/delmenu.vim
-	source $VIMRUNTIME/menu.vim
-	language messages zh_CN.utf-8
-	set guifont=Consolas:h12
+    set enc=utf-8
+    set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+    set langmenu=zh_CN.UTF-8
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+    language messages zh_CN.utf-8
+    set guifont=Consolas:h12
 elseif has('unix')
-	set guifont=Monospace\ 12
+    set guifont=Monospace\ 12
 elseif has('mac')
-	set guifont=Monaco\ 12
+    set guifont=Monaco\ 12
 endif
 
 function SetCppFile()
-	inoremap ' ''<ESC>i
-	inoremap " ""<ESC>i
-	inoremap ( ()<ESC>i
-	inoremap [ []<ESC>i
-	inoremap { {<CR>}<ESC>O
-	map <F5> : call Compile() <CR>
-	map <F6> : call Run() <CR>
-	map <F7> : ! gdb %< <CR>
-	map <F9> : call Build_And_Run() <CR>
+    inoremap ' ''<ESC>i
+    inoremap " ""<ESC>i
+    inoremap ( ()<ESC>i
+    inoremap [ []<ESC>i
+    inoremap { {<CR>}<ESC>O
+    map <F5> : call Compile() <CR>
+    map <F6> : call Run() <CR>
+    map <F7> : ! gdb %<.out <CR>
+    map <F9> : call Build_And_Run() <CR>
 endfunction
 
 function Compile()
-	if &filetype == 'cpp'
-		exec "!g++ % -o %<.out -g -Wall -Wextra -Wconversion"
-	elseif &filetype == 'c'
-		exec "!gcc % -o %<.out -g -Wall -Wextra -Wconversion"
-	endif
+    if &filetype == 'cpp'
+        exec "!g++ % -o %<.out -g -Wall -Wextra -Wconversion"
+    elseif &filetype == 'c'
+        exec "!gcc % -o %<.out -g -Wall -Wextra -Wconversion"
+    endif
 endfunction
 
 function Run()
-	if &filetype == 'cpp' || &filetype == 'c'
-		if has('win32')
-			exec "! %<.out"
-		elseif has('unix')
-			exec "!time ./%<.out"
-		endif
-	elseif &filetype == 'sh'
-		exec "!bash %"
-	endif
+    if &filetype == 'cpp' || &filetype == 'c'
+        if has('win32')
+            exec "! %<.out"
+        elseif has('unix')
+            exec "!time ./%<.out"
+        endif
+    elseif &filetype == 'sh'
+        exec "!bash %"
+    endif
 endfunction
 
 function Build_And_Run()
-	call Compile()
-	call Run()
+    call Compile()
+    call Run()
 endfunction
