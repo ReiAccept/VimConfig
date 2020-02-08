@@ -31,9 +31,10 @@ if has('win32')
     source $VIMRUNTIME/menu.vim
     language messages zh_CN.utf-8
     set guifont=Consolas:h12
-    set guifontwide=仿宋
+    set guifontwide=仿宋set clipboard=unnamed
 elseif has('unix')
     set guifont=Monospace\ 12
+    set clipboard=unnamed
 elseif has('mac')
     set guifont=Monaco\ 12
 endif
