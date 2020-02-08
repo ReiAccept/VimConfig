@@ -33,10 +33,17 @@ if has('win32')
     set guifont=Consolas:h12
     set guifontwide=仿宋
 elseif has('unix')
-    set guifont=Monospace\ 12
-    set clipboard=unnamed
+    set guifont=Monospace\ 12 
 elseif has('mac')
     set guifont=Monaco\ 12
+endif
+
+if has('clipboard')
+    if has('unnamedplus') " When possible use + register for copy-paste
+        set clipboard=unnamed,unnamedplus
+    else " On mac and Windows, use * register for copy-paste
+        set clipboard=unnamed
+    endif
 endif
 
 function SetCppFile()
