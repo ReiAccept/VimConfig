@@ -56,10 +56,10 @@ function SetCppFile()
     "map <F4> : call Compile() <CR>
     map <F5> : make <CR>
     map <F6> : call Run() <CR>
-    map <F7> : Termdebug %<.out <CR>
+    map <F7> : Termdebug %<.run <CR>
     map <F8> : call FormatCode()<CR>
     map <F9> : call Build_And_Run() <CR>
-    set makeprg=g++\ %\ -o\ %<.out\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
+    set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
 endfunction
 
 function SetPythonFile()
@@ -73,18 +73,18 @@ endfunction
 
 function Compile()
     if &filetype == 'cpp'
-        exec "!g++ % -o %<.out -g -std=c++11 -O2 -Wall -Wextra -Wconversion"
+        exec "!g++ % -o %<.run -g -std=c++11 -O2 -Wall -Wextra -Wconversion"
     elseif &filetype == 'c'
-        exec "!gcc % -o %<.out -g -Wall -Wextra -Wconversion"
+        exec "!gcc % -o %<.run -g -Wall -Wextra -Wconversion"
     endif
 endfunction
 
 function Run()
     if &filetype == 'cpp' || &filetype == 'c'
         if has('win32')
-            exec "! %<.out"
+            exec "! %<.run"
         elseif has('unix')
-            exec "!time ./%<.out"
+            exec "!time ./%<.run"
         endif
     elseif &filetype == 'sh'
         exec "!bash %"
