@@ -33,7 +33,7 @@ if has('win32')
     set guifont=Consolas:h12
     set guifontwide=仿宋
 elseif has('unix')
-    set guifont=Monospace\ 12 
+    set guifont=YaHei\ Monaco\ Hybird\ 11
 elseif has('mac')
     set guifont=Monaco\ 12
 endif
