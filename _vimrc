@@ -57,11 +57,12 @@ colorscheme angr
 syntax on
 filetype plugin indent on
 autocmd BufNewFile,BufRead *.cpp exec ":call SetCppFile()"
-autocmd BufNewFile,BufRead *.c exec ":call SetCFile()"
+autocmd BufNewFile,BufRead *.c exec ":call SetCppFile()"
 autocmd BufNewFile,BufRead *.py exec ":call SetPythonFile()"
+command! -nargs=0 -bar W  exec "w"   "有的时候键盘的Shift延迟导致w变成W
 
 if has('win32')
-    autocmd GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 240)
+    autocmd GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 253)
     set enc=utf-8
     set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
     set langmenu=zh_CN.UTF-8
@@ -100,20 +101,12 @@ function SetCppFile()
     map <F7> : Termdebug %<.run <CR>
     map <F8> : call FormatCode()<CR>
     map <F9> : call Build_And_Run() <CR>
-    set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
+    if &filetype == 'cpp'
+        set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
+    elseif &filetype == 'c'
+        set makeprg=gcc\ %\ -o\ %<.run\ -g
+    endif
 endfunction
-
-function SetCFile()
-    call BracketCompletion()
-    packadd termdebug
-    map <F5> : make <CR>
-    map <F6> : call Run() <CR>
-    map <F7> : Termdebug %<.run <CR>
-    map <F8> : call FormatCode()<CR>
-    map <F9> : call Build_And_Run() <CR>
-    set makeprg=gcc\ %\ -o\ %<.run\ -g\ -std=c90\ -O2\ -Wall\ -Wextra\ -Wconversion
-endfunction
-" Using -std=c90 For Fucking Tan Hao Qiang!
 
 function SetPythonFile()
     call BracketCompletion()
@@ -140,7 +133,7 @@ endfunction
 
 func! FormatCode()
     exec "w"
-    if &filetype == 'cpp' || &filetype == 'C' || &filetype == 'h'
+    if &filetype == 'cpp' || &filetype == 'c' || &filetype == 'h'
         exec "!astyle --style=ansi -n %"
         exec "e %"
     endif
