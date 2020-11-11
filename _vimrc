@@ -98,10 +98,12 @@ function SetCppFile()
     call BracketCompletion()
     packadd termdebug
     map <F5> : make <CR>
+    inoremap <F5> <ESC> : w <CR>
     map <F6> : call Run() <CR>
     map <F7> : Termdebug %<.run <CR>
     map <F8> : call FormatCode()<CR>
     map <F9> : call Build_And_Run() <CR>
+    inoremap <F9> <ESC> : call Build_And_Run() <CR>
     set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
 endfunction
 
@@ -148,3 +150,4 @@ Plug 'Valloric/ListToggle'
 call plug#end()
 
 let g:rainbow_active = 1
+
