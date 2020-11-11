@@ -59,7 +59,8 @@ filetype plugin indent on
 autocmd BufNewFile,BufRead *.cpp exec ":call SetCppFile()"
 autocmd BufNewFile,BufRead *.c exec ":call SetCppFile()"
 autocmd BufNewFile,BufRead *.py exec ":call SetPythonFile()"
-command! -nargs=0 -bar W  exec "w"   "有的时候键盘的Shift延迟导致w变成W
+command! -nargs=0 -bar W  exec "w"
+"有的时候键盘的Shift延迟导致w变成W
 
 if has('win32')
     autocmd GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 253)
@@ -101,11 +102,7 @@ function SetCppFile()
     map <F7> : Termdebug %<.run <CR>
     map <F8> : call FormatCode()<CR>
     map <F9> : call Build_And_Run() <CR>
-    if &filetype == 'cpp'
-        set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
-    elseif &filetype == 'c'
-        set makeprg=gcc\ %\ -o\ %<.run\ -g
-    endif
+    set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
 endfunction
 
 function SetPythonFile()
@@ -127,6 +124,7 @@ function Run()
 endfunction
 
 function Build_And_Run()
+    exec "w"
     exec "make"
     call Run()
 endfunction
@@ -150,4 +148,3 @@ Plug 'Valloric/ListToggle'
 call plug#end()
 
 let g:rainbow_active = 1
-
