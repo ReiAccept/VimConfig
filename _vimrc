@@ -102,7 +102,7 @@ function SetCppFile()
     map <F7> : Termdebug %<.run <CR>
     map <F8> : call FormatCode()<CR>
     map <F9> : call Build_And_Run() <CR>
-    set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++17\ -O2\ -Wall\ -Wextra\ -Wconversion
+    set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
 endfunction
 
 function SetPythonFile()
@@ -138,7 +138,6 @@ endfunc
 
 call plug#begin('$VIM/vimfiles/plugged')
 Plug 'junegunn/vim-easy-align'
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
@@ -147,4 +146,3 @@ Plug 'Valloric/ListToggle'
 call plug#end()
 
 let g:rainbow_active = 1
-
