@@ -102,7 +102,7 @@ function SetCppFile()
     map <F7> : Termdebug %<.run <CR>
     map <F8> : call FormatCode()<CR>
     map <F9> : call Build_And_Run() <CR>
-    set makeprg=g++\ \"%\"\ -o\ \"%<.run\"\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
+    set makeprg=g++\ \"%\"\ -o\ \"%<.run\"\ -g\ -std=c++11\ -O2\ -Wall
 endfunction
 
 function SetPythonFile()
