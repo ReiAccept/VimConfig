@@ -50,7 +50,7 @@ set autoindent
 set cursorline
 let mapleader = "\<Space>"
 if has('gui_running')
-    set lines=38 columns=80
+    set lines=40 columns=90
     set guioptions-=T
 endif
 colorscheme angr
@@ -102,7 +102,7 @@ function SetCppFile()
     map <F7> : Termdebug %<.run <CR>
     map <F8> : call FormatCode()<CR>
     map <F9> : call Build_And_Run() <CR>
-    set makeprg=g++\ %\ -o\ %<.run\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
+    set makeprg=g++\ \"%\"\ -o\ \"%<.run\"\ -g\ -std=c++11\ -O2\ -Wall\ -Wextra\ -Wconversion
 endfunction
 
 function SetPythonFile()
@@ -114,7 +114,7 @@ endfunction
 function Run()
     if &filetype == 'cpp' || &filetype == 'c'
         if has('win32')
-            exec "! %<.run"
+            exec "! \"%<.run\""
         elseif has('unix')
             exec "!time ./%<.run"
         endif
@@ -146,3 +146,4 @@ Plug 'Valloric/ListToggle'
 call plug#end()
 
 let g:rainbow_active = 1
+
