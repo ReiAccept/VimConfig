@@ -1,15 +1,22 @@
-============使用说明============  
-leader--->空格键  
-leader-q打开/关闭quickfix  
-F5编译  
-F6运行  
-F7Debug  
-F8代码格式化  
-F9编译&运行  
-  
-Mail:Spaceless@outlook.com  
+### 使用说明
+leader--->空格键
 
-============更新日志============  
+leader-q打开/关闭quickfix
+
+F8 代码格式化
+
+F9 编译
+
+F10 运行
+
+F12 编译&运行  
+
+### Changelog
+
+V0.30
+
+使用 Vim9Script
+
 V0.27  
 修改了C语言编译指令以兼容谭语言  
   
